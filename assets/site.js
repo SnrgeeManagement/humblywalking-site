@@ -18,7 +18,7 @@ const SHOP_EMAIL = 'info@humblywalking.com';
     v.play && v.play().catch(() => {});
   });
 
-  /* ---------- Product page: gallery, sizes, checkout ---------- */
+  /* ---------- Product page: gallery and checkout ---------- */
   const product = $('[data-product]');
   if (product) {
     const mainImg = $('.gallery .main img', product);
@@ -27,20 +27,11 @@ const SHOP_EMAIL = 'info@humblywalking.com';
       $$('.thumbs button', product).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     }));
 
-    let size = null;
-    const buy = $('[data-buy]', product), status = $('[data-status]', product), sizeLabel = $('[data-size-label]', product);
-    $$('.sizes button', product).forEach(b => b.addEventListener('click', () => {
-      size = b.textContent.trim();
-      $$('.sizes button', product).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-      sizeLabel.textContent = ' — ' + size;
-      buy.firstChild.textContent = 'Add to Cart — ' + product.dataset.price + ' ';
-      status.textContent = '';
-    }));
+    const buy = $('[data-buy]', product), status = $('[data-status]', product);
     buy.addEventListener('click', () => {
-      if (!size) { status.textContent = 'Please choose a size first.'; return; }
       const link = product.dataset.square;
       if (!link) { status.textContent = 'Checkout link coming soon.'; return; }
-      openCheckout({ link, name: product.dataset.name, price: product.dataset.price, img: product.dataset.img, size });
+      openCheckout({ link, name: product.dataset.name, price: product.dataset.price, img: product.dataset.img });
     });
   }
 
@@ -57,7 +48,7 @@ const SHOP_EMAIL = 'info@humblywalking.com';
     ckWin.focus();
     $('[data-ck-img]', overlay).src = item.img;
     $('[data-ck-name]', overlay).textContent = item.name;
-    $('[data-ck-meta]', overlay).textContent = 'Size ' + item.size + ' · ' + item.price;
+    $('[data-ck-meta]', overlay).textContent = item.price + ' · Choose your size at checkout';
     overlay.classList.add('open');
     $('[data-ck-reopen]', overlay).focus();
     clearInterval(ckTimer);
