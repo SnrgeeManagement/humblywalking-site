@@ -3,7 +3,7 @@
    SETTINGS — edit these two lines only.
    SHEET_ENDPOINT: paste your Google Apps Script web app URL here to send
    custom order requests to your Google Sheet. Leave it '' to use email.  */
-const SHEET_ENDPOINT = '';
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZ8WVXJuVMKf0M0HVarrYqnxb5Omb-49lmVGwNHI1Q8ZRHjM2R6KBmm3qMNRYOZYjKXg/exec';
 const SHOP_EMAIL = 'info@humblywalking.com';
 /* ------------------------------------------------------------------ */
 
